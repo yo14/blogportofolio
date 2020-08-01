@@ -5,6 +5,10 @@
     <title>Title</title>
 </head>
 <body>
-test
+{% for blog in blogs%}
+    <h2>{{blog.title}}</h2>
+    <p>{{blog.description}}</p>
+    <p style="color: green;">{{blog.date}}</p>
+{% endfor %}
 </body>
 </html>
