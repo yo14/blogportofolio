@@ -1,14 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-{% for blog in blogs%}
-    <h2><a href="{% url 'blog:detail' blog.id %}">{{blog.title}}</a></h2>
-    <p>{{blog.description}}</p>
-    <p style="color: green;">{{blog.date}}</p>
+{% extends "portfolio/base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+<h1 id="blogtitle" class="font-weight-bold text-center">Blog</h1>
+
+<h3 class="text-center mb-5">TuxCoder has written {{ blogs.count }} blog{{ blogs.count|pluralize }}</h3>
+
+{% for blog in blogs %}
+<div class="row justify-content-center my-3">
+  <div class="col-md-10">
+    <a href="{% url 'blog:detail' blog.id %}">
+      <h2>{{ blog.title }}</h2>
+    </a>
+    <h5 class="text-muted">{{ blog.date|date:'M d Y'|upper }}</h5>
+    <h4>{{ blog.description|striptags|truncatechars:100 }}</h4>
+  </div>
+</div>
 {% endfor %}
-</body>
-</html>
+
+{% endblock %}
